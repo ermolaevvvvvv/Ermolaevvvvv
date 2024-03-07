@@ -1,0 +1,100 @@
+﻿<Page x:Class="Ermolaev.Pages.PagePostavki"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Ermolaev.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1500"
+      Title="PagePostavki" IsVisibleChanged="Page_IsVisibleChanged">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid Grid.Column="1"
+                  Name="dtgPostavki"
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn 
+                    Header="Предприятие" Width="*"
+                    Binding="{Binding Selskoe_predpriyatie.nazvanie_predpriyatiya}"/>
+                <DataGridTextColumn 
+                    Header="Название продукции" Width="*"
+                    Binding="{Binding Produktsiya.nazvanie_produktsii}"/>
+                <DataGridTextColumn 
+                    Header="Объем" Width="*"
+                    Binding="{Binding obem}"/>
+                <DataGridTextColumn 
+                    Header="Дата поставки" Width="*"
+                    Binding="{Binding data_postavki}"/>
+                <DataGridTextColumn 
+                    Header="Себестоимость" Width="*"
+                    Binding="{Binding sebestoimost}"/>
+                <DataGridTemplateColumn Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="BtnEdit" BorderBrush="White" 
+                                    Content="Редактировать"
+                                    Background="LightGray" 
+                                    Width="160" 
+                                    HorizontalAlignment="Center" 
+                                    Click="BtnEdit_Click" 
+                                    Style="{StaticResource RoundButton}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+        <StackPanel Grid.Row="0"
+                    Orientation="Vertical"
+                    VerticalAlignment="Top">
+            <TextBlock Text="Фильтры"/>
+            <TextBlock Text="Фильтр по предприятию"/>
+            <ComboBox Name="CmbYear"
+                      SelectionChanged="CmbYear_SelectionChanged"
+                      Margin="5"/>
+            <TextBlock Text="Фильтр по названию продукта"/>
+            <ComboBox Name="CmbName" SelectionChanged="CmbName_SelectionChanged"
+                      Margin="5"/>
+            
+            <TextBlock Text="Поиск по себестоимости" Margin="5"/>
+            <TextBox Name="TxtSearchSum"
+                     TextChanged="TxtSearchSum_TextChanged"
+                     Height="40"
+                     Width="400"/>
+            <Button Name="BtnAdd"
+                    Content="Добавление"
+                    Margin="5"
+                    Click="BtnAdd_Click"
+                    Style="{StaticResource RoundButton}"
+                    Background="LightGreen"
+                    BorderBrush="White"/>
+            <Button Name="BtnDelete"
+                    Content="Удалить запись"
+                    Margin="5"
+                    Click="BtnDelete_Click"
+                      Style="{StaticResource RoundButton}"
+                    Background="Red"
+                    BorderBrush="White"/>
+            <Button Name="BtnResetFiltr"
+                    Content="Сброс фильтров"
+                    Margin="5"
+                    Click="BtnResetFiltr_Click"
+                      Style="{StaticResource RoundButton}"
+                    Background="LightSkyBlue"
+                    BorderBrush="White"/>
+            <Button Name="BtnGoList"
+                    Content="Перейти к списку"
+                    Margin="5"
+                    Click="BtnGoList_Click"
+                      Style="{StaticResource RoundButton}"
+                    Background="LightGray"
+                    BorderBrush="White"/>
+        </StackPanel>
+    </Grid>
+</Page>

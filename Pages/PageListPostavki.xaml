@@ -1,0 +1,161 @@
+﻿<Page x:Class="Ermolaev.Pages.PageListPostavki"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Ermolaev.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1500"
+      Title="PageListPostavki">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <ListView Grid.Column="1" 
+                  Name="LViewPostavki">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="5"
+                          Width="1280">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1.2*"/>
+                            <ColumnDefinition Width="1.25*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1.5*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Width="140"
+                               Grid.Column="2"
+                               Stretch="UniformToFill"
+                               HorizontalAlignment="Left"
+                               Margin="5"
+                               x:Name="imgPhoto">
+                            <Image.Source>
+                                <Binding Path="photo">
+                                    <Binding.TargetNullValue>
+                                        <ImageSource>\Images\Satoru.jpg</ImageSource>
+                                    </Binding.TargetNullValue>
+                                </Binding>
+                            </Image.Source>
+                        </Image>
+                        <TextBlock Grid.Column="0"
+                                   Text="{Binding Selskoe_predpriyatie.nazvanie_predpriyatiya}" 
+                                   FontSize="16"
+                                     Margin="5"/>
+
+                        <TextBlock  Grid.Column="1"
+                                     FontSize="16"
+                                     Margin="5"
+                                   Text="{Binding Produktsiya.nazvanie_produktsii}"/>
+                        <TextBlock  Grid.Column="3"
+                                     FontSize="16"
+                                     Margin="5"
+                                   Text="{Binding obem}"/>
+                        <TextBlock  Grid.Column="4"
+                                     FontSize="16"
+                                     Margin="5"
+                                    TextWrapping="Wrap"
+                                   Text="{Binding data_postavki}"/>
+                        <TextBlock  Grid.Column="5"
+                                   Text="{Binding sebestoimost}"
+                                   FontSize="16"
+                                     Margin="5"/>
+                        <Button Name="BtnEdit"
+                                Click="BtnEdit_Click"
+                                Grid.Column="6"
+                                Content="Редактировать"
+                                BorderBrush="White" Background="LightGray"
+                                Width="180" HorizontalAlignment="Center"   Style="{StaticResource RoundButton}"
+                                />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackPanel Orientation="Vertical"
+                    VerticalAlignment="Center">
+
+            <TextBlock Text="Поиск"
+                           Width="130"
+                     Height="30"
+                    Margin="5"
+                           HorizontalAlignment="Center"/>
+            <TextBox Width="300"
+                     Height="30"
+                     Name="TxtSearch"
+                     Margin="5"
+                     TextChanged="TxtSearch_TextChanged"/>
+
+            <StackPanel Orientation="Vertical"
+                        VerticalAlignment="Center"
+                        Margin="10">
+                <TextBlock Text="Сортировка по объёму"
+                           Width="215"
+                     Height="30"
+                    Margin="5"
+                           HorizontalAlignment="Center"/>
+                <RadioButton Content="Минимальная"
+                             Margin="5"
+                             Name="RbUp"
+                             Checked="RbUp_Checked"/>
+                <RadioButton Content="Максимальная"
+                             Margin="5"
+                             Name="RbDown"
+                             Checked="RbDown_Checked"/>
+            </StackPanel>
+            <TextBlock Text="Фильтр по продукту"
+                           Width="200"
+                     Height="30"
+                    Margin="5"
+                           HorizontalAlignment="Center"/>
+            <ComboBox Name="CmbFiltr"
+                      Margin="5"
+                      SelectionChanged="CmbFiltr_SelectionChanged"/>
+            <Button Name="BtnResetFilr"
+                    Content="Сброс фильтров"
+                    Margin="5"
+                    Click="BtnResetFiltr_Click"
+                    Width="230"
+                      Style="{StaticResource RoundButton}"
+                    Background="LightSkyBlue"
+                    BorderBrush="White"/>
+            <Button Name="BtnSaveToExcel"
+                    BorderBrush="White" Background="LightGreen"
+                     Style="{StaticResource RoundButton}"
+                    Content="Печать в Excel"
+                    Margin="10"
+                    Width="230"
+                    Click="BtnSaveToExcel_Click">
+            </Button>
+            <Button Name="BtnSaveToExcelTemplate"
+                    BorderBrush="White" Background="LightGreen"
+                     Style="{StaticResource RoundButton}"
+                    Content="Печать в Шаблон Excel"
+                    Margin="10"
+                    Width="230"
+                    Click="BtnSaveToExcelTemplate_Click">
+            </Button>
+            
+            <Button Name="BtnSaveToWord"
+                    BorderBrush="White" Background="LightBlue"
+                     Style="{StaticResource RoundButton}"
+                    Margin="10"
+                    Content="Печать в Word"
+                    Width="230"
+                    Click="BtnSaveToWord_Click">
+            </Button>
+           
+            <Button Name="BtnSaveToPDF"
+                    BorderBrush="White" Background="Red"
+                     Style="{StaticResource RoundButton}"
+                    Content="Печать в PDF"
+                    Margin="10"
+                    Width="230"
+                    Click="BtnSaveToPDF_Click">
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>

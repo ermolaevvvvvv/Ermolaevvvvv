@@ -1,0 +1,10 @@
+private static ErmolaevEntities _context;
+
+private static ErmolaevEntities GetContext()
+        {
+            if(_context == null)
+            {
+                _context= new ErmolaevEntities();
+            }
+            return _context;
+        }

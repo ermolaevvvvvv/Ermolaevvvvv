@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище ErmolaevModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Postavki">
+          <Key>
+            <PropertyRef Name="id_postavki" />
+          </Key>
+          <Property Name="id_postavki" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="data_postavki" Type="date" />
+          <Property Name="obem" Type="int" />
+          <Property Name="sebestoimost" Type="nvarchar(max)" />
+          <Property Name="id_predpriyatiya" Type="int" />
+          <Property Name="id_produkta" Type="int" />
+          <Property Name="photo" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Produktsiya">
+          <Key>
+            <PropertyRef Name="id_produkta" />
+          </Key>
+          <Property Name="id_produkta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nazvanie_produktsii" Type="nvarchar" MaxLength="50" />
+          <Property Name="edinitsa_izmereniya" Type="nvarchar" MaxLength="50" />
+          <Property Name="zakupochnaya_tsena" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Selskoe predpriyatie">
+          <Key>
+            <PropertyRef Name="id_predpriyatiya" />
+          </Key>
+          <Property Name="id_predpriyatiya" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nazvanie_predpriyatiya" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Postavki_Produktsiya">
+          <End Role="Produktsiya" Type="Self.Produktsiya" Multiplicity="0..1" />
+          <End Role="Postavki" Type="Self.Postavki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produktsiya">
+              <PropertyRef Name="id_produkta" />
+            </Principal>
+            <Dependent Role="Postavki">
+              <PropertyRef Name="id_produkta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Postavki_Selskoe predpriyatie">
+          <End Role="Selskoe predpriyatie" Type="Self.Selskoe predpriyatie" Multiplicity="0..1" />
+          <End Role="Postavki" Type="Self.Postavki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Selskoe predpriyatie">
+              <PropertyRef Name="id_predpriyatiya" />
+            </Principal>
+            <Dependent Role="Postavki">
+              <PropertyRef Name="id_predpriyatiya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ErmolaevModelContainer">
+          <EntitySet Name="Postavki" EntityType="Self.Postavki" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produktsiya" EntityType="Self.Produktsiya" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Selskoe predpriyatie" EntityType="Self.Selskoe predpriyatie" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Postavki_Produktsiya" Association="Self.FK_Postavki_Produktsiya">
+            <End Role="Produktsiya" EntitySet="Produktsiya" />
+            <End Role="Postavki" EntitySet="Postavki" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Postavki_Selskoe predpriyatie" Association="Self.FK_Postavki_Selskoe predpriyatie">
+            <End Role="Selskoe predpriyatie" EntitySet="Selskoe predpriyatie" />
+            <End Role="Postavki" EntitySet="Postavki" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ErmolaevModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ErmolaevEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Postavki" EntityType="ErmolaevModel.Postavki" />
+          <EntitySet Name="Selskoe_predpriyatie" EntityType="ErmolaevModel.Selskoe_predpriyatie" />
+          <AssociationSet Name="FK_Postavki_Selskoe_predpriyatie" Association="ErmolaevModel.FK_Postavki_Selskoe_predpriyatie">
+            <End Role="Selskoe_predpriyatie" EntitySet="Selskoe_predpriyatie" />
+            <End Role="Postavki" EntitySet="Postavki" />
+          </AssociationSet>
+          <EntitySet Name="Produktsiya" EntityType="ErmolaevModel.Produktsiya" />
+          <AssociationSet Name="FK_Postavki_Produktsiya" Association="ErmolaevModel.FK_Postavki_Produktsiya">
+            <End Role="Produktsiya" EntitySet="Produktsiya" />
+            <End Role="Postavki" EntitySet="Postavki" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Postavki">
+          <Key>
+            <PropertyRef Name="id_postavki" />
+          </Key>
+          <Property Name="id_postavki" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="data_postavki" Type="DateTime" Precision="0" />
+          <Property Name="obem" Type="Int32" />
+          <Property Name="sebestoimost" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="id_predpriyatiya" Type="Int32" />
+          <Property Name="id_produkta" Type="Int32" />
+          <Property Name="photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Selskoe_predpriyatie" Relationship="ErmolaevModel.FK_Postavki_Selskoe_predpriyatie" FromRole="Postavki" ToRole="Selskoe_predpriyatie" />
+          <NavigationProperty Name="Produktsiya" Relationship="ErmolaevModel.FK_Postavki_Produktsiya" FromRole="Postavki" ToRole="Produktsiya" />
+        </EntityType>
+        <EntityType Name="Selskoe_predpriyatie">
+          <Key>
+            <PropertyRef Name="id_predpriyatiya" />
+          </Key>
+          <Property Name="id_predpriyatiya" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nazvanie_predpriyatiya" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Postavki" Relationship="ErmolaevModel.FK_Postavki_Selskoe_predpriyatie" FromRole="Selskoe_predpriyatie" ToRole="Postavki" />
+        </EntityType>
+        <Association Name="FK_Postavki_Selskoe_predpriyatie">
+          <End Type="ErmolaevModel.Selskoe_predpriyatie" Role="Selskoe_predpriyatie" Multiplicity="0..1" />
+          <End Type="ErmolaevModel.Postavki" Role="Postavki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Selskoe_predpriyatie">
+              <PropertyRef Name="id_predpriyatiya" />
+            </Principal>
+            <Dependent Role="Postavki">
+              <PropertyRef Name="id_predpriyatiya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Produktsiya">
+          <Key>
+            <PropertyRef Name="id_produkta" />
+          </Key>
+          <Property Name="id_produkta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nazvanie_produktsii" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="edinitsa_izmereniya" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="zakupochnaya_tsena" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Postavki" Relationship="ErmolaevModel.FK_Postavki_Produktsiya" FromRole="Produktsiya" ToRole="Postavki" />
+        </EntityType>
+        <Association Name="FK_Postavki_Produktsiya">
+          <End Type="ErmolaevModel.Produktsiya" Role="Produktsiya" Multiplicity="0..1" />
+          <End Type="ErmolaevModel.Postavki" Role="Postavki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produktsiya">
+              <PropertyRef Name="id_produkta" />
+            </Principal>
+            <Dependent Role="Postavki">
+              <PropertyRef Name="id_produkta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ErmolaevModelContainer" CdmEntityContainer="ErmolaevEntities">
+          <EntitySetMapping Name="Postavki">
+            <EntityTypeMapping TypeName="ErmolaevModel.Postavki">
+              <MappingFragment StoreEntitySet="Postavki">
+                <ScalarProperty Name="photo" ColumnName="photo" />
+                <ScalarProperty Name="id_produkta" ColumnName="id_produkta" />
+                <ScalarProperty Name="id_predpriyatiya" ColumnName="id_predpriyatiya" />
+                <ScalarProperty Name="sebestoimost" ColumnName="sebestoimost" />
+                <ScalarProperty Name="obem" ColumnName="obem" />
+                <ScalarProperty Name="data_postavki" ColumnName="data_postavki" />
+                <ScalarProperty Name="id_postavki" ColumnName="id_postavki" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Selskoe_predpriyatie">
+            <EntityTypeMapping TypeName="ErmolaevModel.Selskoe_predpriyatie">
+              <MappingFragment StoreEntitySet="Selskoe predpriyatie">
+                <ScalarProperty Name="nazvanie_predpriyatiya" ColumnName="nazvanie_predpriyatiya" />
+                <ScalarProperty Name="id_predpriyatiya" ColumnName="id_predpriyatiya" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produktsiya">
+            <EntityTypeMapping TypeName="ErmolaevModel.Produktsiya">
+              <MappingFragment StoreEntitySet="Produktsiya">
+                <ScalarProperty Name="zakupochnaya_tsena" ColumnName="zakupochnaya_tsena" />
+                <ScalarProperty Name="edinitsa_izmereniya" ColumnName="edinitsa_izmereniya" />
+                <ScalarProperty Name="nazvanie_produktsii" ColumnName="nazvanie_produktsii" />
+                <ScalarProperty Name="id_produkta" ColumnName="id_produkta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
